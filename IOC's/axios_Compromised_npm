@@ -1,0 +1,12 @@
+1. what actually happen?
+    axios is the most popular JavaScript HTTP client library with over 100 million weekly downloads. On March 30, 2026, StepSecurity identified two malicious versions of the widely used axios HTTP client library published to npm: axios@1.14.1 and axios@0.30.4. 
+    The malicious versions inject a new dependency:
+    plain-crypto-js@4.2.1, which is never imported anywhere in the axios source code. 
+    Its sole purpose is to execute a postinstall script that acts as a cross platform remote access trojan (RAT) dropper, targeting macOS, Windows, and Linux. 
+    The dropper contacts a live command and control server and delivers platform specific second stage payloads. 
+    After execution, the malware deletes itself and replaces its own package.json with a clean version to evade forensic detection.
+
+2. important note:
+    This was not opportunistic. It was precision. The malicious dependency was staged 18 hours in advance. Three payloads were pre-built for three operating systems. Both release branches were poisoned within 39 minutes of each other. Every artifact was designed to self-destruct. Within two seconds of npm install, the malware was already calling home to the attacker's server before npm had even finished resolving dependencies. This is among the most operationally sophisticated supply chain attacks ever documented against a top-10 npm package.
+
+3. how it happens?
