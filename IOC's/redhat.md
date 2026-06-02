@@ -491,3 +491,39 @@ npm
 4.0.11
 
 2026-06-01 10:54:20 UTC	2026-06-01 11:00:22 UTC
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Attack chain:
+
+npm install
+    │
+    ▼
+preinstall → node index.js
+    │
+    ▼
+ROT/Caesar + eval() decoding
+    │
+    ▼
+AES-GCM decrypts payloads
+    │
+    ▼
+Downloads Bun runtime (if missing)
+    │
+    ▼
+Writes payload to /tmp/p[random].js
+    │
+    ▼
+Executes payload
+    │
+    ▼
+Deletes payload file
+    │
+    ▼
+Credential harvesting
+    │
+    ▼
+Encrypted exfiltration
+    │
+    ▼
+GitHub fallback exfiltration
